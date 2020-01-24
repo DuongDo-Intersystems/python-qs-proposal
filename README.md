@@ -43,23 +43,26 @@ Although port and username are most likely the defaults, you should verify those
 **Prerequisite**: You should have [PyODBC](https://pypi.org/project/pyodbc/) already installed in your local machine.
 If you having trouble installing PyODBC, please see [how to install PyODBC](pyodbc_install.md)
 
-Before installing InterSystems driver, navigate to the **Solutions** directory of your terminal: `cd Solutions` 
+Go to: [ftp://ftp.intersystems.com/pub/iris/odbc/2019](ftp://ftp.intersystems.com/pub/iris/odbc/2019) and download the corresponding file to your operating system. 
+
+*Instructions will be difficult and hard to make sure customers follow it correctly.*
     
 | Operating System | Command |
 | -- | :--: |  
 | Local instance | InterSystems IRIS PyODBC driver is installed. You can skip this step. |
 | Windows | `pyodbc_wheel\ODBC-2018.1.1.635.0-win_x64.exe` |
-| Mac, Linux | `odbcinst –i –d –f pyodbc_wheel/odbcinst.ini` |    
+| Mac | 1. Unzip file: `tar -xzvf ODBC-2019.1.0.510.4-macx64.tar.gz`  2. Find the odbcinst.ini and libirisodbc.35  3. Modify odbcinst.ini as shown here.  4.`odbcinst –i –d –f pyodbc_wheel/odbcinst.ini` |
+| Linux | | Mac | 1. Unzip file: `tar -xzvf ODBC-2019.1.0.510.4-lnxubuntux64.tar.gz`  2. Find the odbcinst.ini and libirisodbc.35  3. Modify odbcinst.ini as shown here.  4.`odbcinst –i –d –f pyodbc_wheel/odbcinst.ini` ||    
 
 ## Connect to InterSystems via the Native API
 
-Before installing, make sure you are in **Solutions** directory of your terminal.
+Go to: and download the corresponding driver to your operating system.  
 
 | Operating System | Command |
 | -- | :--: |  
-| Window | `pip install nativeAPI_wheel\irisnative-1.0.0-cp34.cp35.cp36.cp37-none-win_amd64.whl` |
-| Mac | `pip install nativeAPI_wheel/irisnative-1.0.0-cp34-abi3-macosx_10_13_x86_64.macosx_10_14_x86_64.whl`  |
-| Linux | `pip install nativeAPI_wheel/irisnative-1.0.0-cp34-abi3-linux_x86_64.whl` |
+| Window | `pip install irisnative-1.0.0-cp34.cp35.cp36.cp37-none-win_amd64.whl` |
+| Mac | `pip install irisnative-1.0.0-cp34-abi3-macosx_10_13_x86_64.macosx_10_14_x86_64.whl`  |
+| Linux | `pip install irisnative-1.0.0-cp34-abi3-linux_x86_64.whl` |
 
 ## Run sample Python code to connect with InterSystems IRIS database
 
