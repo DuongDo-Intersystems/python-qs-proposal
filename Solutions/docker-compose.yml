@@ -1,0 +1,8 @@
+version: '3'
+services:
+  python36:
+    build:
+      context: .
+      dockerfile: Dockerfile-python36
+    volumes:
+       - .:/code

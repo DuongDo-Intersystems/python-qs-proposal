@@ -1,0 +1,24 @@
+FROM python:3.6
+
+WORKDIR /code
+
+RUN apt-get update
+RUN cat /etc/apt/sources.list
+RUN apt-cache search iodbc
+RUN apt-get install -y unixodbc-dev iodbc
+
+RUN pip install --upgrade --global-option=build_ext --global-option="-I/usr/local/include" --global-option="-L/usr/local/lib" pyodbc
+
+RUN wget ftp://ftp.intersystems.com/pub/iris/odbc/2019/ODBC-2019.2.0.107.0-lnxubuntux64.tar.gz
+RUN tar -xvzf ODBC-2019.2.0.107.0-lnxubuntux64.tar.gz
+
+COPY dev/odbc/redist/unixodbc/odbcinst.ini_unixODBCtemplate .
+COPY bin/libirisodbcur6435.so bin/libirisodbcur6435.so
+RUN sed -i 's+/home/cache/bin/libirisodbc.so+bin/libirisodbcur6435.so+g' odbcinst.ini_unixODBCtemplate
+RUN sed -i 's+UsageCount=1+Description=InterSystems ODBC+g' odbcinst.ini_unixODBCtemplate
+COPY test.py .
+RUN cat odbcinst.ini_unixODBCtemplate
+RUN ls
+RUN odbcinst -i -d -f odbcinst.ini_unixODBCtemplate
+
+RUN python test.py
